@@ -6,33 +6,35 @@
 <head>
 <style>
 table, th, td {
-	border: 1px solid black;
+    border: 1px solid black;
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Customers</title>
+<title>Orders</title>
 </head>
 <body>
-	<h1>Customers</h1>
-	<c:forEach items="${customers}" var="customer">
+	<h1>List of Orders</h1>
+	<c:forEach items="${orders}" var="order">
 		<br>
-		<h1>${customer.cId} ${customer.cName}</h1>
-		<br>
-		<h2>${customer.cName}'s Orders</h2>
+		<h2>${order.oId}</h2>
 		<table>
 			<tr>
-				<th>Order ID</th>
 				<th>Quantity</th>
+				<th>Order Date</th>
+				<th>Customer ID</th>
+				<th>Customer Name</th>
 				<th>Product ID</th>
 				<th>Product Description</th>
 			</tr>
 			<tr>
-				<c:forEach items="${customer.orders}" var="order">
+				<c:forEach items="${orders}" var="order2">
 					<tr>
-						<td>${order.oId}</td>
-						<td>${order.qty}</td>
-						<td>${order.prod.pId}</td>
-						<td>${order.prod.pDesc}</td>
+						<td>${order2.qty}</td>
+						<td>${order2.orderDate}</td>
+						<td>${order2.cust.cId}</td>
+						<td>${order2.cust.cName}</td>
+						<td>${order2.prod.pId}</td>
+						<td>${order2.prod.pDesc}</td>
 				</c:forEach>
 			</tr>
 		</table>
