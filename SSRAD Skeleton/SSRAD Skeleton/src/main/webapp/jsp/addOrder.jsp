@@ -3,21 +3,24 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Course</title>
+<title>Add Orders</title>
 </head>
 <body>
-	<form:form modelAttribute="product1">
-		<h1>Add product</h1>
+	<form:form modelAttribute="order1">
+		<h1>Add Order</h1>
 		<table>
 			<tr>
-				<td>Product description:</td>
-				<td><form:input path="pDesc"></form:input></td>
+				<td>Customer id:</td>
+				<td><form:input path="cust.cId"></form:input></td>
 			</tr>
 			<tr>
-				<td>Quantity in stock:</td>
-				<td><form:input path="qtyInStock"></form:input></td>
+				<td>Product id:</td>
+				<td><form:input path="prod.pId"></form:input></td>
 			</tr>
-
+			<tr>
+				<td>Quantity:</td>
+				<td><form:input path="qty"></form:input></td>
+			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Add" /></td>
 			</tr>

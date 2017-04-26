@@ -6,18 +6,13 @@
 <title>Add Course</title>
 </head>
 <body>
-	<form:form modelAttribute="product1">
-		<h1>Add product</h1>
+	<form:form modelAttribute="customer1">
+		<h1>Add customer</h1>
 		<table>
 			<tr>
-				<td>Product description:</td>
-				<td><form:input path="pDesc"></form:input></td>
+				<td>Customer name:</td>
+				<td><form:input path="cName"></form:input></td>
 			</tr>
-			<tr>
-				<td>Quantity in stock:</td>
-				<td><form:input path="qtyInStock"></form:input></td>
-			</tr>
-
 			<tr>
 				<td colspan="2"><input type="submit" value="Add" /></td>
 			</tr>

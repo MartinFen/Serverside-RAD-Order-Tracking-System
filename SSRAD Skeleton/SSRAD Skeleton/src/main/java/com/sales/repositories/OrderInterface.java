@@ -1,13 +1,11 @@
 package com.sales.repositories;
-
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import com.sales.models.Customer;
+import com.sales.models.Order;
 
 @Repository
-public interface CustomerInterface extends CrudRepository<Customer, Long> {
+public interface OrderInterface extends CrudRepository<Order, Long> {
 
-	//void findById();
+	//Order findOne(Order o);
 
 }

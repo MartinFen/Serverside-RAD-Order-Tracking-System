@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sales.models.Customer;
+import com.sales.models.Product;
 import com.sales.repositories.CustomerInterface;
 
 @Service
 public class CustomerService {
-	
+
 	@Autowired
 	private CustomerInterface customerInterface;
 
@@ -18,4 +19,11 @@ public class CustomerService {
 
 		return (ArrayList<Customer>) customerInterface.findAll();
 	}
+
+	public Customer save(Customer customer) {
+
+		return customerInterface.save(customer);
+	}
+
+	
 }
