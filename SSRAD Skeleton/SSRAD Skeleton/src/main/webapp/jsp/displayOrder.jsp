@@ -37,5 +37,10 @@ table, th, td {
 			</tr>
 		</table>
 	</c:forEach>
+	<a href="/">Home</a>
+	<a href="/addOrder">Add Order</a>
+	<a href="/showProducts">List Products</a>
+	<a href="/showCustomers">List Customers</a>
+	<a href="/">Logout</a>
 </body>
 </html>

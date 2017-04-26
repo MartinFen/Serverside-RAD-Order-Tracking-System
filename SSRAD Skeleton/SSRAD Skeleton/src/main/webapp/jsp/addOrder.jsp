@@ -20,12 +20,15 @@
 			<tr>
 				<td>Quantity:</td>
 				<td><form:input path="qty"></form:input></td>
+				<td><form:errors path="qty"></form:errors></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Add" /></td>
 			</tr>
 		</table>
+		<a href="/">Home</a>
+		<a href="/showCustomers">List Customers</a>
+		<a href="/showProducts">List Products</a>
 	</form:form>
-
 </body>
 </html>

@@ -3,10 +3,12 @@ package com.sales.controllers;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,7 +36,7 @@ public class OrderController {
 	public String showCust(Model m) {
 
 		ArrayList<Order> orders = os.getAll();
-		ArrayList<Customer> customers = cs.getAll();
+		//ArrayList<Customer> customers = cs.getAll();
 
 		for (Order o1 : orders) {
 			System.out.println("Orderid=" + o1.getoId());
@@ -64,15 +66,17 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/addOrder", method=RequestMethod.POST)
-	public String postOrder(@ModelAttribute("order1") Order o, Product p, Customer c, HttpServletRequest h, Model m) {
+	public String postOrder(@Valid @ModelAttribute("order1") Order o, BindingResult result, HttpServletRequest h, Model m) {
 		
-		System.out.println("HTTP Request = " + h.getMethod());
+		if (result.hasErrors()) {
+			
+			return "addOrder";
 		
-		//os.findById(o);
+		} else {
+		
+			System.out.println("HTTP Request = " + h.getMethod());
+		
 		os.save(o);
-		//os.save(o, o2, o3);
-		//ps.save(p);
-		//cs.save(c);
 		
 		ArrayList<Order> orders = os.getAll();
 		
@@ -83,6 +87,7 @@ public class OrderController {
 		m.addAttribute("orders", orders);
 
 		return "displayOrder";
+		} 
 	}
 
 }
