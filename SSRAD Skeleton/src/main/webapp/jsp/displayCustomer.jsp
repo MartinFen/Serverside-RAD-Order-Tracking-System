@@ -15,9 +15,7 @@ table, th, td {
 <body>
 	<h1>Customers</h1>
 	<c:forEach items="${customers}" var="customer">
-		<br>
 		<h1>${customer.cId} ${customer.cName}</h1>
-		<br>
 		<h2>${customer.cName}'s Orders</h2>
 		<table>
 			<tr>
@@ -41,6 +39,6 @@ table, th, td {
 	<a href="/addCustomer">Add Customer</a>
 	<a href="/showProducts">List Products</a>
 	<a href="/showOrders">List Orders</a>
-	<a href="/">Logout</a>
+	<a href="/logout">Logout</a>
 </body>
 </html>

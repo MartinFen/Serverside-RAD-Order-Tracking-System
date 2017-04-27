@@ -41,6 +41,6 @@ table, th, td {
 	<a href="/addOrder">Add Order</a>
 	<a href="/showProducts">List Products</a>
 	<a href="/showCustomers">List Customers</a>
-	<a href="/">Logout</a>
+	<a href="/logout">Logout</a>
 </body>
 </html>

@@ -21,7 +21,7 @@
 		<a href="/">Home</a>
 		<a href="/showOrders">List Orders</a>
 		<a href="/showProducts">List Products</a>
-		<a href="/">Logout</a>
+		<a href="/logout">Logout</a>
 	</form:form>
 </body>
 </html>
