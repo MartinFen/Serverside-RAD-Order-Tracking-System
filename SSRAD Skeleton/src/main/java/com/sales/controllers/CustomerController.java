@@ -3,10 +3,12 @@ package com.sales.controllers;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,7 +41,6 @@ public class CustomerController {
 	}*/
 	
 	
-	
 	@Autowired
 	private CustomerService cs;
 	
@@ -51,8 +52,14 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/addCustomer", method=RequestMethod.POST)
-	public String postProduct(@ModelAttribute("customer1") Customer c, HttpServletRequest h, Model m) {
+	public String postProduct(@Valid @ModelAttribute("customer1") Customer c, BindingResult result, HttpServletRequest h, Model m) {
 		
+		
+		if (result.hasErrors()) {
+			
+			return "addCustomer";
+		
+		} else {
 		System.out.println("HTTP Request = " + h.getMethod());
 		
 		cs.save(c);
@@ -72,6 +79,7 @@ public class CustomerController {
 		m.addAttribute("customers", customers);
 
 		return "displayCustomer";
+		}
 	}
 	
 	@RequestMapping(value = "/showCustomers", method = RequestMethod.GET)

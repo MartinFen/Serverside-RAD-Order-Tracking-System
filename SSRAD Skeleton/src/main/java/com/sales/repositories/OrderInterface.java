@@ -6,4 +6,6 @@ import com.sales.models.Order;
 @Repository
 public interface OrderInterface extends CrudRepository<Order, Long> {
 
+	//Order findOne(Order o);
+
 }

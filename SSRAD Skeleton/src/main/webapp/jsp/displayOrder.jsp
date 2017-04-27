@@ -6,7 +6,7 @@
 <head>
 <style>
 table, th, td {
-    border: 1px solid black;
+	border: 1px solid black;
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -27,17 +27,20 @@ table, th, td {
 				<th>Product Description</th>
 			</tr>
 			<tr>
-				<c:forEach items="${orders}" var="order2">
-					<tr>
-						<td>${order2.qty}</td>
-						<td>${order2.orderDate}</td>
-						<td>${order2.cust.cId}</td>
-						<td>${order2.cust.cName}</td>
-						<td>${order2.prod.pId}</td>
-						<td>${order2.prod.pDesc}</td>
-				</c:forEach>
+			<tr>
+				<td>${order.qty}</td>
+				<td>${order.orderDate}</td>
+				<td>${order.cust.cId}</td>
+				<td>${order.cust.cName}</td>
+				<td>${order.prod.pId}</td>
+				<td>${order.prod.pDesc}</td>
 			</tr>
 		</table>
 	</c:forEach>
+	<a href="/">Home</a>
+	<a href="/addOrder">Add Order</a>
+	<a href="/showProducts">List Products</a>
+	<a href="/showCustomers">List Customers</a>
+	<a href="/">Logout</a>
 </body>
 </html>

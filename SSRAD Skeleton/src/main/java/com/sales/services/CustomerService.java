@@ -11,7 +11,7 @@ import com.sales.repositories.CustomerInterface;
 
 @Service
 public class CustomerService {
-	
+
 	@Autowired
 	private CustomerInterface customerInterface;
 
@@ -19,9 +19,11 @@ public class CustomerService {
 
 		return (ArrayList<Customer>) customerInterface.findAll();
 	}
-	
+
 	public Customer save(Customer customer) {
-		
+
 		return customerInterface.save(customer);
 	}
+
+	
 }
