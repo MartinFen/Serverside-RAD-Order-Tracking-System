@@ -25,80 +25,71 @@ import com.sales.services.OrderService;
 
 @Controller
 public class CustomerController {
-	
-	/*@Autowired
-	private OrderService os;
-	
-	@RequestMapping(value = "/showCustomers", method = RequestMethod.GET)
-	public String getCustomers(Model m) {
 
-		ArrayList<Order> orders = os.getAll();
+	/*
+	 * @Autowired private OrderService os;
+	 * 
+	 * @RequestMapping(value = "/showCustomers", method = RequestMethod.GET)
+	 * public String getCustomers(Model m) {
+	 * 
+	 * ArrayList<Order> orders = os.getAll();
+	 * 
+	 * for (Order o1 : orders) { System.out.println("Orderid=" + o1.getoId());
+	 * System.out.println("Orderid=" + o1.getCust().getcName()); }
+	 * 
+	 * m.addAttribute("orders", orders);
+	 * 
+	 * return "displayCustomer"; }
+	 */
 
-		for (Order o1 : orders) {
-			System.out.println("Orderid=" + o1.getoId());
-			System.out.println("Orderid=" + o1.getCust().getcName());
-		}
-
-		m.addAttribute("orders", orders);
-
-		return "displayCustomer";
-	}*/
-	
-	
 	@Autowired
 	private CustomerService cs;
-	
-	@RequestMapping(value = "/addCustomer", method=RequestMethod.GET)
-	public String getProduct(@ModelAttribute("customer1") Customer c, HttpServletRequest h)
-	{
+
+	@RequestMapping(value = "/addCustomer", method = RequestMethod.GET)
+	public String getProduct(@ModelAttribute("customer1") Customer c, HttpServletRequest h) {
 		System.out.println("HTTP Request = " + h.getMethod());
-			return "addCustomer";
+		return "addCustomer";
 	}
-	
-	@RequestMapping(value = "/addCustomer", method=RequestMethod.POST)
-	public String postProduct(@Valid @ModelAttribute("customer1") Customer c, BindingResult result, HttpServletRequest h, Model m) {
-		
-		
+
+	@RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
+	public String postProduct(@Valid @ModelAttribute("customer1") Customer c, BindingResult result,
+			HttpServletRequest h, Model m) {
+
 		if (result.hasErrors()) {
-			
+
 			return "addCustomer";
-		
+
 		} else {
-		System.out.println("HTTP Request = " + h.getMethod());
-		
-		cs.save(c);
-		
-		ArrayList<Customer> customers = cs.getAll();
-		
+			System.out.println("HTTP Request = " + h.getMethod());
 
-		for (Customer c1 : customers) 
-		{
-			System.out.println("Cid=" + c1.getcId());
-			for (Order o1: c1.getOrders()) 
-			{
-				System.out.println("Oid=" + o1.getoId());
+			cs.save(c);
+
+			ArrayList<Customer> customers = cs.getAll();
+
+			for (Customer c1 : customers) {
+				System.out.println("Cid=" + c1.getcId());
+				for (Order o1 : c1.getOrders()) {
+					System.out.println("Oid=" + o1.getoId());
+				}
 			}
-		}
 
-		m.addAttribute("customers", customers);
+			m.addAttribute("customers", customers);
 
-		return "displayCustomer";
+			return "displayCustomer";
 		}
 	}
-	
+
 	@RequestMapping(value = "/showCustomers", method = RequestMethod.GET)
 	public String getCustomers(Model m) {
 
 		ArrayList<Customer> customers = cs.getAll();
 
-		for (Customer c1 : customers) 
-		{
+		for (Customer c1 : customers) {
 			System.out.println("Cid=" + c1.getcId());
-			for (Order o1: c1.getOrders()) 
-			{
+			for (Order o1 : c1.getOrders()) {
 				System.out.println("Oid=" + o1.getoId());
 			}
-			//System.out.println("Orderid=" + c1.getCust().getcName());
+			// System.out.println("Orderid=" + c1.getCust().getcName());
 		}
 
 		m.addAttribute("customers", customers);
@@ -106,12 +97,12 @@ public class CustomerController {
 		return "displayCustomer";
 	}
 
-	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    if (auth != null){    
-	        new SecurityContextLogoutHandler().logout(request, response, auth);
-	    }
-	    return "redirect:/login?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "redirect:/login?logout";
 	}
 }

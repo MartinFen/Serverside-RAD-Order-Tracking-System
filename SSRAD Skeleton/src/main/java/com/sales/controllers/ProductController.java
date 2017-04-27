@@ -1,10 +1,8 @@
 package com.sales.controllers;
 
 import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,27 +31,23 @@ public class ProductController {
 			Model m) {
 
 		if (result.hasErrors()) {
-			
+
 			return "addProduct";
-		
+
 		} else {
 
 			System.out.println("HTTP Request = " + h.getMethod());
 
-			//add to db
 			ps.save(p);
 
-			//get from db
 			ArrayList<Product> products = ps.getAll();
-			
-			//testing if arraylist has values
+
 			for (Product p1 : products) {
 				System.out.println("name=" + p1.getpId());
 			}
-			
-			//Add to model obj
+
 			m.addAttribute("products", products);
-			
+
 			return "displayProduct";
 		}
 	}

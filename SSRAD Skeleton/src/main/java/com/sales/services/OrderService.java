@@ -7,6 +7,8 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sales.exceptions.NotFoundException;
 import com.sales.models.*;
 import com.sales.repositories.*;
 
@@ -15,36 +17,47 @@ public class OrderService {
 
 	@Autowired
 	private OrderInterface orderInterface;
-
+	
+	@Autowired
+	private ProductInterface productInterface;
+	
 	@Autowired
 	private CustomerInterface customerInterface;
 
-	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-	Date date = new Date();
+	private Customer c;
+	private Product p;
+	
+	private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	private Date date = new Date();
 
 	public ArrayList<Order> getAll() {
 
 		return (ArrayList<Order>) orderInterface.findAll();
+		//return 
 	}
 
-	public Order save(Order o) {
-		// get date
-		// System.out.println(dateFormat.format(date));
+	public Order save(Order o) throws NotFoundException {
 
-		o.setOrderDate(dateFormat.format(date));
-		// o.getCust().getcId();
-		// o.getProd().getpId();
-		// check if cid exists -> customerInterface findBycid
-		// check if pid exists
-		// Catch exception
-		//customerInterface.findById();
-		//if(o.getCust().getcId()==customerInterface.findById(customer) )
-		orderInterface.save(o);
-		return orderInterface.save(o);
+		c = customerInterface.findOne(o.getCust().getcId());
+		p = productInterface.findOne(o.getProd().getpId());
+		
+		if (c == null || p == null) 
+		{
+			throw new NotFoundException("Empty!");
+		} 
+		else 
+		{
+			p.setQtyInStock(p.getQtyInStock() - o.getQty());
+			
+			o.setOrderDate(dateFormat.format(date));
+			
+			o.getCust().setcName(c.getcName());
+			
+			o.getProd().setpDesc(p.getpDesc());
+			
+			orderInterface.save(o);
+			
+			return orderInterface.save(o);
+		}
 	}
-
-	/*public Customer findById(Customer customer) {
-
-		//return customer.getcId();
-	}*/
 }

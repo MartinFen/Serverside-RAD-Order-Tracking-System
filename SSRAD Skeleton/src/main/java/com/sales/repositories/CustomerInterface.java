@@ -8,6 +8,4 @@ import com.sales.models.Customer;
 @Repository
 public interface CustomerInterface extends CrudRepository<Customer, Long> {
 
-	//void findById();
-
 }
