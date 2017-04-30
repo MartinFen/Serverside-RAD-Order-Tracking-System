@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import com.sales.exceptions.NotIdException;
-import com.sales.exceptions.NullIdException;
+import com.sales.exceptions.NotCIdException;
+import com.sales.exceptions.NotPIdException;
+import com.sales.exceptions.NullCIdException;
+import com.sales.exceptions.NullPIdException;
 import com.sales.exceptions.QtyException;
 import com.sales.models.Order;
 import com.sales.services.OrderService;
@@ -27,7 +29,7 @@ public class OrderController {
 	@Autowired
 	private OrderService os;
 	
-	ModelAndView mav = new ModelAndView();
+	//ModelAndView mav = new ModelAndView();
 
 	@RequestMapping(value = "/showOrders", method = RequestMethod.GET)
 	public String showOrder(Model m) {
@@ -36,7 +38,6 @@ public class OrderController {
 
 		for (Order o1 : orders) {
 			System.out.println("Orderid=" + o1.getoId());
-
 		}
 
 		m.addAttribute("orders", orders);
@@ -75,13 +76,46 @@ public class OrderController {
 				m.addAttribute("orders", orders);
 
 				return "displayOrder";
-			} catch (NullIdException | NotIdException | QtyException e) {
+			} catch (NullCIdException | NullPIdException | NotCIdException | NotPIdException | QtyException e) {
 				e.printStackTrace();
-				e.getMessage();
-				
-				
-				return "redirect:addOrder.html";
+				m.addAttribute("message", e.getMessage());
+				m.addAttribute("cid", o.getCust().getcId());
+				m.addAttribute("pid", o.getProd().getpId());
+				m.addAttribute("Qty", o.getQty());
+				return "errorpage1";
 			}
+			/*catch (NullPIdException e) {
+				e.printStackTrace();
+				m.addAttribute("message", e.getMessage());
+				m.addAttribute("cid", o.getCust().getcId());
+				m.addAttribute("pid", o.getProd().getpId());
+				m.addAttribute("Qty", o.getQty());
+				return "errorpage1";
+			}
+			catch (NotCIdException e) {
+				e.printStackTrace();
+				m.addAttribute("message", e.getMessage());
+				m.addAttribute("cid", o.getCust().getcId());
+				m.addAttribute("pid", o.getProd().getpId());
+				m.addAttribute("Qty", o.getQty());
+				return "errorpage1";
+			}
+			catch (NotPIdException e) {
+				e.printStackTrace();
+				m.addAttribute("message", e.getMessage());
+				m.addAttribute("cid", o.getCust().getcId());
+				m.addAttribute("pid", o.getProd().getpId());
+				m.addAttribute("Qty", o.getQty());
+				return "errorpage1";
+			}
+			catch (QtyException e) {
+				e.printStackTrace();
+				m.addAttribute("message", e.getMessage());
+				m.addAttribute("cid", o.getCust().getcId());
+				m.addAttribute("pid", o.getProd().getpId());
+				m.addAttribute("Qty", o.getQty());
+				return "errorpage1";
+			}*/
 		}
 	}
 }
